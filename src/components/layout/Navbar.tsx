@@ -26,10 +26,12 @@ import React from "react";
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },
   { href: "/about", label: "About", role: "PUBLIC" },
-  { href: "/parcel", label: "Create-Parcel", role: "PUBLIC" },
+  
   { href: "/admin", label: "Dashboard", role: role.admin },
   { href: "/admin", label: "Dashboard", role: role.superAdmin },
+
   { href: "/sender", label: "Dashboard", role: role.SENDER },
+  // { href: "/sender/createParcel", label: "Create-Parcel", role: role.SENDER },
   { href: "/receiver", label: "Dashboard", role: role.RECEIVER },
 ];
 
