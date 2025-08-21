@@ -25,7 +25,8 @@ import React from "react";
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
   { href: "/", label: "Home", role: "PUBLIC" },
-  { href: "/about", label: "About", role: "PUBLIC" },
+  { href: "/About", label: "About", role: "PUBLIC" },
+  { href: "/Track", label: "Track", role: "PUBLIC" },
   
   { href: "/admin", label: "Dashboard", role: role.admin },
   { href: "/admin", label: "Dashboard", role: role.superAdmin },
@@ -150,6 +151,12 @@ export default function Navbar() {
           {!data?.data?.email && (
             <Button asChild className="text-sm">
               <Link to="/login">Login</Link>
+            </Button>
+          )}
+
+          {!data?.data?.email && (
+            <Button asChild className="text-sm">
+              <Link to="/Register">Register</Link>
             </Button>
           )}
         </div>

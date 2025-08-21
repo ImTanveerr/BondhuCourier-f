@@ -1,4 +1,6 @@
 // import Analytics from "@/pages/Admin/Analytics";
+import parcels from "@/pages/Admin/parcels";
+import users from "@/pages/Admin/users";
 import { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -16,10 +18,19 @@ export const adminSidebarItems: ISidebarItem[] = [
     ],
   },
   {
-    title: "Tour Management",
+    title: "Management Pannel",
     items: [
      
-      
+      {
+        title: "Manage Users",
+        url: "/admin/users",
+        component: users,
+      },
+      {
+        title: "Manage Parcels",
+        url: "/admin/parcels",
+        component: parcels,
+      },
       
     ],
   },

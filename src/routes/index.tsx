@@ -17,6 +17,7 @@ import Success from "@/pages/Payment/Success";
 import Fail from "@/pages/Payment/Fail";
 import parcel from "@/pages/parcel";
 import CreateParcel from "@/pages/parcel/addParcel";
+import tracking from "@/pages/User/tracking";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         Component: About,
         path: "about",
+      },
+      {
+        Component: tracking,
+        path: "track",
       },
      
       {
@@ -88,4 +93,5 @@ export const router = createBrowserRouter([
     Component: Fail,
     path: "/payment/fail",
   },
+ 
 ]);

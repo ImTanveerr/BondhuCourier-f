@@ -1,22 +1,16 @@
 import { Button } from "@/components/ui/button";
 import Logo from "@/assets/icons/Logo";
-import { Link } from "react-router";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection() {
-  const [selectedDivision, setSelectedDivision] = useState<string | undefined>(
-    undefined
-  );
+  const [trackingId, setTrackingId] = useState("");
+  const navigate = useNavigate();
 
+  const handleTrack = () => {
+    if (!trackingId.trim()) return alert("Please enter a tracking ID");
+    navigate(`/Track/${trackingId.trim()}`);
+  };
 
   return (
     <section className="relative overflow-hidden py-32 min-h-screen">
@@ -37,35 +31,25 @@ export default function HeroSection() {
 
             <div>
               <h1 className="mb-6 text-2xl font-bold tracking-tight text-pretty lg:text-5xl">
-                Simplifying Parcel Delivery in{" "}
+                Deliver Parcel Anywhere in{" "}
                 <span className="text-primary">Bangladesh</span>
               </h1>
               <p className="mx-auto max-w-3xl text-muted-foreground lg:text-xl">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Elig
-                doloremque mollitia fugiat omnis! Porro facilis quo animi
-                consequatur. Explicabo.
+                Enter your tracking ID below to see the latest status and tracking events of your parcel.
               </p>
             </div>
-            <div className="mt-6 flex justify-center gap-3">
-              <Select onValueChange={(value) => setSelectedDivision(value)}>
-                <SelectTrigger className="w-[300px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Divisions</SelectLabel>
-                   
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
 
-              {selectedDivision ? (
-                <Button asChild>
-                  <Link to={`/tours?division=${selectedDivision}`}>Search</Link>
-                </Button>
-              ) : (
-                <Button disabled>Search</Button>
-              )}
+            <div className="mt-6 flex justify-center gap-3">
+              <input
+                type="text"
+                placeholder="Enter Tracking ID"
+                value={trackingId}
+                onChange={(e) => setTrackingId(e.target.value)}
+                className="w-[300px] border px-3 py-2 rounded"
+              />
+              <Button onClick={handleTrack} disabled={!trackingId.trim()}>
+                Track
+              </Button>
             </div>
           </div>
         </div>

@@ -29,7 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import z from "zod";
-import { useAddParcelMutation } from "@/redux/Api/sender.api";
+import { useAddParcelMutation } from "@/redux/apis/sender.api";
 
 // ParcelType enum matches backend
 const parcelTypes = ["DOCUMENT", "BOX", "FRAGILE", "OTHER"] as const;
