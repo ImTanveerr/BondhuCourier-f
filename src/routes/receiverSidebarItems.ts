@@ -21,7 +21,7 @@ export const receiverSidebarItems: ISidebarItem[] = [
         items: [
 
             {
-                title: "All Parcel",
+                title: "Parcels History",
                 url: "AllParcels",
                 component: ReceiverParcels,
             },

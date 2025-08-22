@@ -1,7 +1,6 @@
 // import Analytics from "@/pages/Admin/Analytics";
 import addParcel from "@/pages/parcel/addParcel";
 import SenderParcels from "@/pages/parcel/sender.parcel";
-import GetParcels from "@/pages/parcel/sender.parcel";
 import { ISidebarItem } from "@/types";
 import { lazy } from "react";
 

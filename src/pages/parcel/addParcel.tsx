@@ -128,57 +128,59 @@ export default function CreateParcelForm({ senderId, className }: Props) {
             )}
           />
 
-          {/* Weight */}
-          <FormField
-            control={form.control}
-            name="weight"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Weight (kg)</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="Weight"
-                    {...field}
-                    onChange={(e) => field.onChange(Number(e.target.value))}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex gap-4">
+            {/* Weight */}
+            <FormField
+              control={form.control}
+              name="weight"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Weight (kg)</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="Weight"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          {/* Parcel Type */}
-          <FormField
-            control={form.control}
-            name="parcelType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Parcel Type</FormLabel>
-                <FormControl>
-                  <Select
-                    onValueChange={(value) => field.onChange(value)}
-                    value={field.value}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Parcel Type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectLabel>Parcel Types</SelectLabel>
-                        {Object.values(ParcelType).map((type) => (
-                          <SelectItem key={type} value={type}>
-                            {type}
-                          </SelectItem>
-                        ))}
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            {/* Parcel Type */}
+            <FormField
+              control={form.control}
+              name="parcelType"
+              render={({ field }) => (
+                <FormItem className="flex-1">
+                  <FormLabel>Parcel Type</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={(value) => field.onChange(value)}
+                      value={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Parcel Type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Parcel Types</SelectLabel>
+                          {Object.values(ParcelType).map((type) => (
+                            <SelectItem key={type} value={type}>
+                              {type}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
 
           {/* Description */}
           <FormField

@@ -1,9 +1,25 @@
 import { useGetMyParcelsQuery, useCancelParcelMutation } from "@/redux/apis/sender.api";
 import { IParcel } from "@/types/parcel.types";
-import ParcelFilters from "../parcel/parcel.filter";
+
+import { useState } from "react";
 export default function SenderParcels() {
-  const { data: parcels, isLoading, isError } = useGetMyParcelsQuery();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  
+
+
+
+  //  const { data: parcels, isLoading, isError } = useGetMyParcelsQuery();
+  const { data: parcels, isLoading, isError } = useGetMyParcelsQuery({
+    page: currentPage,
+    limit: 3, // adjust per-page items
+  });
+console.log(parcels);
+
+
   const [cancelParcel, { isLoading: isCancelling }] = useCancelParcelMutation();
+
+
 
   const handleCancel = async (id: string) => {
     try {
@@ -26,6 +42,8 @@ export default function SenderParcels() {
           <p><strong>Receiver:</strong> {parcel.receiverId?.name || parcel.receiverId}</p>
           <p><strong>Type:</strong> {parcel.parcelType}</p>
           <p><strong>Status:</strong> {parcel.status}</p>
+          <p><strong>Weight:</strong> {parcel.weight}</p>
+          <p><strong>Cost:</strong> {parcel.cost}</p>
           <p><strong>Pickup:</strong> {parcel.pickupAddress}</p>
           <p><strong>Tracking ID:</strong> {parcel.trackingId || "N/A"}</p>
 
@@ -41,6 +59,9 @@ export default function SenderParcels() {
           )}
         </div>
       ))}
+      {/* Pagination */}
+
+      
     </div>
   );
 }

@@ -15,7 +15,6 @@ import { TRole } from "@/types";
 import Homepage from "@/pages/Homepage";
 import Success from "@/pages/Payment/Success";
 import Fail from "@/pages/Payment/Fail";
-import CreateParcel from "@/pages/parcel/addParcel";
 import Track from "@/pages/User/Track";
 
 import { receiverSidebarItems } from "./receiverSidebarItems";
@@ -72,16 +71,7 @@ export const router = createBrowserRouter([
       ...generateRoutes(receiverSidebarItems),
     ],
   },
-  {
-    Component: withAuth(CreateParcel, role.SENDER as TRole),
-    path: "/Parcel",
-    children: [
-      { index: true, element: <Navigate to="Sender/addParcel" /> },
-      {
-        Component: CreateParcel,
-      }
-    ],
-  },
+  
   {
     Component: Login,
     path: "/login",

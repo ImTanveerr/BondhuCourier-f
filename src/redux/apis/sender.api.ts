@@ -31,10 +31,11 @@ export const senderApi = baseApi.injectEndpoints({
             invalidatesTags: ["PARCEL"], // So that parcels list auto-refreshes after cancel
         }),
 
-        getMyParcels: builder.query<IParcel[], void>({
-            query: () => ({
+        getMyParcels: builder.query<IParcel[],  { page: number; limit?: number }>({
+            query: (params) => ({
                 url: "/parcel/get",
                 method: "GET",
+                params,
             }),
             providesTags: ["PARCEL"],
             transformResponse: (response: IResponse<IParcel[]>) => response.data,

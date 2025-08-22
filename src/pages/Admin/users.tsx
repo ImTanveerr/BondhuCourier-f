@@ -44,6 +44,11 @@ export default function AdminUsers() {
     }
   };
 
+  const handleCancel = () => {
+    setEditingUserId(null);
+    setFormData({});
+  };
+
   const handleInputChange = (key: keyof IUser, value: string) => {
     setFormData((prev) => ({ ...prev, [key]: value }));
   };
@@ -122,12 +127,20 @@ export default function AdminUsers() {
                   )}
 
                   {editingUserId === user._id ? (
-                    <button
-                      onClick={() => handleUpdate(user._id!)}
-                      className="px-2 py-1 bg-blue-600 text-white rounded"
-                    >
-                      Save
-                    </button>
+                    <>
+                      <button
+                        onClick={() => handleUpdate(user._id!)}
+                        className="px-2 py-1 bg-blue-600 text-white rounded"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className="px-2 py-1 bg-gray-400 text-white rounded"
+                      >
+                        Cancel
+                      </button>
+                    </>
                   ) : (
                     <button
                       onClick={() => {
@@ -226,12 +239,20 @@ export default function AdminUsers() {
               )}
 
               {editingUserId === user._id ? (
-                <button
-                  onClick={() => handleUpdate(user._id!)}
-                  className="px-2 py-1 bg-blue-600 text-white rounded flex-1"
-                >
-                  Save
-                </button>
+                <>
+                  <button
+                    onClick={() => handleUpdate(user._id!)}
+                    className="px-2 py-1 bg-blue-600 text-white rounded flex-1"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={handleCancel}
+                    className="px-2 py-1 bg-gray-400 text-white rounded flex-1"
+                  >
+                    Cancel
+                  </button>
+                </>
               ) : (
                 <button
                   onClick={() => {

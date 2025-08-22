@@ -47,82 +47,60 @@ export default function ParcelFilters({}: ParcelFiltersProps) {
   };
 
   return (
-    <div className="w-60 border p-4 rounded-md space-y-4">
-      <h2 className="font-semibold mb-2">Filters</h2>
+ <div className="w-full flex flex-col sm:flex-row sm:items-center gap-2 mb-4 flex-wrap">
+  {/* Search */}
+  <input
+    type="text"
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    placeholder="Search description, pickup..."
+    className="flex-1 min-w-[150px] border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
 
-      <div>
-        <Label>Search</Label>
-        <input
-          type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search description, pickup..."
-          className="w-full border px-2 py-1 rounded"
-        />
-      </div>
+  {/* Status + Sort side by side */}
+  <div className="flex gap-2 flex-1 min-w-[260px]">
+    {/* Status */}
+    <Select onValueChange={setStatus} value={status} className="flex-1 min-w-[120px]">
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder="Status" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          {Object.values(ParcelStatus).map((s) => (
+            <SelectItem key={s} value={s}>
+              {s}
+            </SelectItem>
+          ))}
+        </SelectGroup>
+      </SelectContent>
+    </Select>
 
-      <div>
-        <Label>Status</Label>
-        <Select onValueChange={setStatus} value={status}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Status</SelectLabel>
-              {Object.values(ParcelStatus).map((s) => (
-                <SelectItem key={s} value={s}>
-                  {s}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+    {/* Sort */}
+    <Select onValueChange={setSort} value={sort} className="flex-1 min-w-[120px]">
+      <SelectTrigger className="w-full">
+        <SelectValue placeholder="Sort" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectItem value="pickupAddress">Pickup</SelectItem>
+          <SelectItem value="deliveryAddress">Delivery</SelectItem>
+          <SelectItem value="createdAt">Created At</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  </div>
 
-      <div>
-        <Label>Type</Label>
-        <Select onValueChange={setType} value={type}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Parcel Type</SelectLabel>
-              {Object.values(ParcelType).map((t) => (
-                <SelectItem key={t} value={t}>
-                  {t}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+  {/* Buttons */}
+  <div className="flex gap-2 ml-auto">
+    <Button size="sm" variant="outline" onClick={handleClear}>
+      Clear
+    </Button>
+    <Button size="sm" onClick={handleGo}>
+      Go
+    </Button>
+  </div>
+</div>
 
-      <div>
-        <Label>Sort</Label>
-        <Select onValueChange={setSort} value={sort}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Sort by" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="pickupAddress">Pickup Address</SelectItem>
-              <SelectItem value="deliveryAddress">Delivery Address</SelectItem>
-              <SelectItem value="createdAt">Created At</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
 
-      <div className="flex justify-between mt-4">
-        <Button size="sm" variant="outline" onClick={handleClear}>
-          Clear
-        </Button>
-        <Button size="sm" onClick={handleGo}>
-          Go
-        </Button>
-      </div>
-    </div>
   );
 }
