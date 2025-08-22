@@ -17,7 +17,8 @@ import Success from "@/pages/Payment/Success";
 import Fail from "@/pages/Payment/Fail";
 import parcel from "@/pages/parcel";
 import CreateParcel from "@/pages/parcel/addParcel";
-import tracking from "@/pages/User/tracking";
+import Track from "@/pages/User/track";
+import Tracking from "@/pages/User/tracking";
 
 export const router = createBrowserRouter([
   {
@@ -33,10 +34,14 @@ export const router = createBrowserRouter([
         path: "about",
       },
       {
-        Component: tracking,
+        Component: Track,
         path: "track",
       },
-     
+      {
+        Component: Tracking,
+        path: "tracking/:trackingId",
+      },
+
       {
         Component: withAuth(parcel),
         path: "parcel",
@@ -66,7 +71,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="Sender/addParcel" /> },
       {
-        Component: CreateParcel,  }
+        Component: CreateParcel,
+      }
     ],
   },
   {
@@ -93,5 +99,5 @@ export const router = createBrowserRouter([
     Component: Fail,
     path: "/payment/fail",
   },
- 
+
 ]);
