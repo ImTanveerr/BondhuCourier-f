@@ -15,10 +15,11 @@ import { TRole } from "@/types";
 import Homepage from "@/pages/Homepage";
 import Success from "@/pages/Payment/Success";
 import Fail from "@/pages/Payment/Fail";
-import parcel from "@/pages/parcel";
 import CreateParcel from "@/pages/parcel/addParcel";
-import Track from "@/pages/User/track";
-import Tracking from "@/pages/User/tracking";
+import Track from "@/pages/User/Track";
+import Tracking from "@/pages/User/Tracking";
+import { receiverSidebarItems } from "./receiverSidebarItems";
+
 
 export const router = createBrowserRouter([
   {
@@ -42,10 +43,7 @@ export const router = createBrowserRouter([
         path: "tracking/:trackingId",
       },
 
-      {
-        Component: withAuth(parcel),
-        path: "parcel",
-      },
+
     ],
   },
   {
@@ -63,6 +61,14 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Navigate to="Sender/dashboard" /> },
       ...generateRoutes(senderSidebarItems),
+    ],
+  },
+  {
+    Component: withAuth(DashboardLayout, role.RECEIVER as TRole),
+    path: "/Receiver",
+    children: [
+      { index: true, element: <Navigate to="/Receiver/dashboard" /> },
+      ...generateRoutes(receiverSidebarItems),
     ],
   },
   {

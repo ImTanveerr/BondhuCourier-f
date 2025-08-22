@@ -16,14 +16,24 @@ export const adminApi = baseApi.injectEndpoints({
     }),
 
     // --- GET PARCELS ---
-    getAllParcels: builder.query<IParcel[], void>({
-      query: () => ({
-        url: "/admin/parcels",
-        method: "GET",
-      }),
+    getAllParcels: builder.query<IParcel[], { searchTerm?: string; status?: string; type?: string; sort?: string } | void>({
+      query: (filters) => {
+        const params = new URLSearchParams();
+
+        if (filters?.searchTerm) params.append("searchTerm", filters.searchTerm);
+        if (filters?.status) params.append("status", filters.status);
+        if (filters?.type) params.append("type", filters.type);
+        if (filters?.sort) params.append("sort", filters.sort);
+
+        return {
+          url: `/admin/parcels?${params.toString()}`,
+          method: "GET",
+        };
+      },
       providesTags: ["PARCEL"],
       transformResponse: (response: IResponse<IParcel[]>) => response.data,
     }),
+
 
     // --- UPDATE USER ---
     updateUser: builder.mutation<IUser, { id: string; body: Partial<IUser> }>({
@@ -33,7 +43,7 @@ export const adminApi = baseApi.injectEndpoints({
         body,
       }),
       invalidatesTags: ["USER"],
-       transformResponse: (res: IResponse<IUser> | any): IUser => res?.data ?? res,
+      transformResponse: (res: IResponse<IUser> | any): IUser => res?.data ?? res,
     }),
 
     // --- BLOCK USER ---

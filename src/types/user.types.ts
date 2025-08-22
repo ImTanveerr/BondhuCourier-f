@@ -4,6 +4,7 @@ export enum Role {
     ADMIN = "ADMIN",
     SENDER = "SENDER",
     RECEIVER = "RECEIVER",
+    USER = "USER",
 }
 
 

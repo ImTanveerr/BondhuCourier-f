@@ -1,6 +1,7 @@
 // import Analytics from "@/pages/Admin/Analytics";
 import parcels from "@/pages/Admin/parcels";
 import users from "@/pages/Admin/users";
+import parcelFilter from "@/pages/parcel/parcel.filter";
 import { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -30,6 +31,11 @@ export const adminSidebarItems: ISidebarItem[] = [
         title: "Manage Parcels",
         url: "/admin/parcels",
         component: parcels,
+      },
+      {
+        title: "Filter Parcels",
+        url: "/admin/filter-parcels",
+        component: parcelFilter,
       },
       
     ],

@@ -3,7 +3,7 @@ import { IResponse } from "@/types";
 import { IParcel } from "@/types/parcel.types";
 export const senderApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-        addParcel: builder.mutation({
+         addParcel: builder.mutation({
             query: (parcelData: any) => ({
                 url: "/sender/create",
                 method: "POST",
@@ -19,6 +19,7 @@ export const senderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["PARCEL"], // So that parcels list auto-refreshes after cancel
         }),
+        
         getMyParcels: builder.query<IParcel[], void>({
             query: () => ({
                 url: "/parcel/get",

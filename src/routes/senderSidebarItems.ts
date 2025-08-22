@@ -1,6 +1,7 @@
 // import Analytics from "@/pages/Admin/Analytics";
 import addParcel from "@/pages/parcel/addParcel";
-import GetParcels from "@/pages/parcel/GetParcels";
+import SenderParcels from "@/pages/parcel/sender.parcel";
+import GetParcels from "@/pages/parcel/sender.parcel";
 import { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -29,7 +30,7 @@ export const senderSidebarItems: ISidebarItem[] = [
       {
         title: "All Parcel",
         url: "AllParcels",
-        component: GetParcels,
+        component: SenderParcels,
       },
       
     ],
