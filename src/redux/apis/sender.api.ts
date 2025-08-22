@@ -1,14 +1,25 @@
 import { baseApi } from "@/redux/baseApi";
 import { IResponse } from "@/types";
-import { IParcel } from "@/types/parcel.types";
+import { IParcel, ParcelType } from "@/types/parcel.types";
+
+export interface ICreateParcel {
+    senderId: string;
+    receiverId: string;
+    pickupAddress: string;
+    deliveryAddress: string;
+    contactNumber: string;
+    weight: number;
+    parcelType: ParcelType;
+    description?: string;
+}
 export const senderApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
-         addParcel: builder.mutation({
-            query: (parcelData: any) => ({
+        addParcel: builder.mutation<IParcel, ICreateParcel>({
+            query: (parcelData) => ({
                 url: "/sender/create",
                 method: "POST",
-                body: parcelData,
-                headers: { "Content-Type": "application/json" },
+                data: parcelData,
+                //headers: { "Content-Type": "application/json" },
             }),
             invalidatesTags: ["SENDER"],
         }),
@@ -19,7 +30,7 @@ export const senderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["PARCEL"], // So that parcels list auto-refreshes after cancel
         }),
-        
+
         getMyParcels: builder.query<IParcel[], void>({
             query: () => ({
                 url: "/parcel/get",

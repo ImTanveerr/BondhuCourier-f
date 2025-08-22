@@ -1,14 +1,4 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import {
   Form,
   FormControl,
@@ -18,202 +8,199 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import z from "zod";
+import { ParcelType, IParcel } from "@/types/parcel.types";
 import { useAddParcelMutation } from "@/redux/apis/sender.api";
 
-// ParcelType enum matches backend
-const parcelTypes = ["DOCUMENT", "BOX", "FRAGILE", "OTHER"] as const;
-
-const formSchema = z.object({
+const parcelSchema = z.object({
   receiverId: z.string().min(1, "Receiver ID is required"),
   pickupAddress: z.string().min(1, "Pickup address is required"),
   deliveryAddress: z.string().min(1, "Delivery address is required"),
   contactNumber: z.string().min(1, "Contact number is required"),
-  weight: z
-    .number()
-    .positive("Weight must be greater than 0"),
-  parcelType: z.enum(parcelTypes, { message: "Select a valid parcel type" }),
+  weight: z.number().min(0.1, "Weight must be greater than 0"),
+  parcelType: z.enum(Object.values(ParcelType)),
   description: z.string().optional(),
 });
 
-type FormValues = z.infer<typeof formSchema>;
+type ParcelFormValues = z.infer<typeof parcelSchema>;
 
-export default function CreateParcel() {
-  const [addParcel] = useAddParcelMutation();
+interface Props {
+  senderId: string;
+  className?: string;
+}
 
-  const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+export default function CreateParcelForm({ senderId, className }: Props) {
+  const [createParcel, { isLoading }] = useAddParcelMutation();
+
+  const form = useForm<ParcelFormValues>({
+    resolver: zodResolver(parcelSchema),
     defaultValues: {
       receiverId: "",
       pickupAddress: "",
       deliveryAddress: "",
-      contactNumber: "",
-      weight: 1,
-      parcelType: "DOCUMENT",
-      description: "",
+      contactNumber: "01874968514",
+      weight: 0,
+      parcelType: ParcelType.DOCUMENT,
+      description: "tumi valo ami valo baki sovai kalo",
     },
   });
 
-  const onSubmit = async (data: FormValues) => {
-    const toastId = toast.loading("Creating parcel...");
-
+  const onSubmit = async (data: ParcelFormValues) => {
     try {
-      const res = await addParcel(data).unwrap();
-      if (res.success) {
-        toast.success("Parcel created successfully", { id: toastId });
-        form.reset();
-      } else {
-        toast.error("Failed to create parcel", { id: toastId });
-      }
-    } catch (err: any) {
-      toast.error(err?.data?.message || "Something went wrong", { id: toastId });
+      await createParcel({ ...data, senderId }).unwrap();
+      toast.success("Parcel created successfully");
+      form.reset();
+    } catch (error: any) {
+      toast.error(error?.data?.message || "Failed to create parcel");
+      console.error(error);
     }
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto mt-16 px-5">
-      <Card>
-        <CardHeader>
-          <CardTitle>Create New Parcel</CardTitle>
-          <CardDescription>Fill in parcel details</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form
-              id="create-parcel-form"
-              className="space-y-4"
-              onSubmit={form.handleSubmit(onSubmit)}
-            >
-              <FormField
-                control={form.control}
-                name="receiverId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Receiver ID</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Receiver's user ID" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+    <div className={cn("w-full max-w-3xl mx-auto mt-16 px-5", className)}>
+      <h2 className="text-2xl font-bold mb-4 text-center">Create Parcel</h2>
 
-              <FormField
-                control={form.control}
-                name="pickupAddress"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Pickup Address</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Pickup location" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 
-              <FormField
-                control={form.control}
-                name="deliveryAddress"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Delivery Address</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Delivery location" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          {/* Receiver ID */}
+          <FormField
+            control={form.control}
+            name="receiverId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Receiver ID</FormLabel>
+                <FormControl>
+                  <Input placeholder="Receiver ID" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              <FormField
-                control={form.control}
-                name="contactNumber"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Contact Number</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Receiver's phone number" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          {/* Pickup Address */}
+          <FormField
+            control={form.control}
+            name="pickupAddress"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Pickup Address</FormLabel>
+                <FormControl>
+                  <Input placeholder="Pickup Address" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              <FormField
-                control={form.control}
-                name="weight"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Weight (kg)</FormLabel>
-                    <FormControl>
-                      <Input type="number" {...field} min={0.1} step={0.1} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          {/* Delivery Address */}
+          <FormField
+            control={form.control}
+            name="deliveryAddress"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Delivery Address</FormLabel>
+                <FormControl>
+                  <Input placeholder="Delivery Address" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              <FormField
-                control={form.control}
-                name="parcelType"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Parcel Type</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select type" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {parcelTypes.map((type) => (
+          {/* Contact Number */}
+          <FormField
+            control={form.control}
+            name="contactNumber"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Contact Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="Contact Number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Weight */}
+          <FormField
+            control={form.control}
+            name="weight"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Weight (kg)</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    placeholder="Weight"
+                    {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Parcel Type */}
+          <FormField
+            control={form.control}
+            name="parcelType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Parcel Type</FormLabel>
+                <FormControl>
+                  <Select
+                    onValueChange={(value) => field.onChange(value)}
+                    value={field.value}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select Parcel Type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectLabel>Parcel Types</SelectLabel>
+                        {Object.values(ParcelType).map((type) => (
                           <SelectItem key={type} value={type}>
                             {type}
                           </SelectItem>
                         ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-              <FormField
-                control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Description (optional)</FormLabel>
-                    <FormControl>
-                      <Input {...field} placeholder="Any notes" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </form>
-          </Form>
-        </CardContent>
-        <CardFooter className="flex justify-end">
-          <Button type="submit" form="create-parcel-form">
-            Create Parcel
+          {/* Description */}
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Description (Optional)</FormLabel>
+                <FormControl>
+                  <Input placeholder="Description" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Submit Button */}
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? "Creating..." : "Create Parcel"}
           </Button>
-        </CardFooter>
-      </Card>
+        </form>
+      </Form>
     </div>
   );
 }

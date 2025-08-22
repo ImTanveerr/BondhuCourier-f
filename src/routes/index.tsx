@@ -17,8 +17,9 @@ import Success from "@/pages/Payment/Success";
 import Fail from "@/pages/Payment/Fail";
 import CreateParcel from "@/pages/parcel/addParcel";
 import Track from "@/pages/User/Track";
-import Tracking from "@/pages/User/Tracking";
+
 import { receiverSidebarItems } from "./receiverSidebarItems";
+import Tracking from "@/pages/User/tracking";
 
 
 export const router = createBrowserRouter([
