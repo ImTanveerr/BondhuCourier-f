@@ -1,5 +1,7 @@
 
-import ReceiverParcels from "@/pages/parcel/receiver.parcel";
+import DeliveredParcels from "@/pages/Receiver/deliverd.parcel";
+import IncomingParcels from "@/pages/Receiver/incoming.parcel";
+import ReceiverParcels from "@/pages/Receiver/receiver.parcel";
 import { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -21,9 +23,19 @@ export const receiverSidebarItems: ISidebarItem[] = [
         items: [
 
             {
-                title: "Parcels History",
+                title: "All Parcels",
                 url: "AllParcels",
                 component: ReceiverParcels,
+            },
+            {
+                title: "Incoming Parcels",
+                url: "incomingParcels",
+                component: IncomingParcels,
+            },
+            {
+                title: "Delivered Parcels",
+                url: "DeliveredParcels",
+                component: DeliveredParcels,
             },
 
         ],

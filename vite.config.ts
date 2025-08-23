@@ -11,7 +11,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    port: 3000,
+  
+  build: {
+    outDir: "dist", // already default, matches your current build
   },
+  base: "./", // ensures paths work on Vercel
 });

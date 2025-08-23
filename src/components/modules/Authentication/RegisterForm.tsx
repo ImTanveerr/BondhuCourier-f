@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,7 +16,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Password from "@/components/ui/Password";
 import {
   useRegisterMutation,
-  useGetRolesQuery,
 } from "@/redux/features/auth/auth.api";
 import { toast } from "sonner";
 import {

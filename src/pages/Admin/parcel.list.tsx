@@ -1,4 +1,3 @@
-import React from "react";
 import { IParcel } from "@/types/parcel.types";
 
 interface ParcelListProps {

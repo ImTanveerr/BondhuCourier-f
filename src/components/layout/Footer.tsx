@@ -11,8 +11,7 @@ export default function Footer() {
             </div>
 
             <p className="mt-4 max-w-xs text-muted-foreground">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse non
-              cupiditate quae nam molestias.
+              Delivering quality services that connect people and businesses efficiently.
             </p>
 
             <ul className="mt-8 flex gap-6">
@@ -133,59 +132,33 @@ export default function Footer() {
               </li>
             </ul>
           </div>
-
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
             <div>
               <p className="font-medium text-foreground/90">Services</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    1on1 Coaching{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Send a Parcel
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Company Review{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Track a Parcel
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Accounts Review{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Parcel Rates
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    HR Consulting{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Corporate Solutions
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    SEO Optimisation{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Returns & Pickup
                   </a>
                 </li>
               </ul>
@@ -193,35 +166,20 @@ export default function Footer() {
 
             <div>
               <p className="font-medium text-foreground/90">Company</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    About{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    About Us
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Meet the Team{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Meet the Team
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Accounts Review{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Careers
                   </a>
                 </li>
               </ul>
@@ -229,35 +187,20 @@ export default function Footer() {
 
             <div>
               <p className="font-medium text-foreground/90">Helpful Links</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Contact{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Contact Support
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    FAQs{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    FAQs
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Live Chat{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Live Chat
                   </a>
                 </li>
               </ul>
@@ -265,44 +208,25 @@ export default function Footer() {
 
             <div>
               <p className="font-medium text-foreground/90">Legal</p>
-
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Accessibility{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Terms & Conditions
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Returns Policy{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Privacy Policy
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    {" "}
-                    Refund Policy{" "}
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Refund Policy
                   </a>
                 </li>
-
                 <li>
-                  <a
-                    href="#"
-                    className="text-foreground/90 transition hover:text-foreground/60"
-                  >
-                    Hiring-3 Statistics
+                  <a href="#" className="text-foreground/90 transition hover:text-foreground/60">
+                    Shipping Policy
                   </a>
                 </li>
               </ul>
@@ -310,8 +234,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className="text-xs text-muted-foreground">
-          &copy; 2022. Company Name. All rights reserved.
+        <p className="text-center text-sm text-muted-foreground">
+          &copy; {new Date().getFullYear()} Bondhu Currier. All rights reserved.
         </p>
       </div>
     </footer>

@@ -1,6 +1,6 @@
 // import Analytics from "@/pages/Admin/Analytics";
-import addParcel from "@/pages/parcel/addParcel";
-import SenderParcels from "@/pages/parcel/sender.parcel";
+import IncomingParcels from "@/pages/Receiver/incoming.parcel";
+import SenderParcels from "@/pages/Sender/sender.parcel";
 import { ISidebarItem } from "@/types";
 import { lazy } from "react";
 
@@ -24,7 +24,7 @@ export const senderSidebarItems: ISidebarItem[] = [
       {
         title: "Create Parcel",
         url: "createParcel",
-        component: addParcel,
+        component: IncomingParcels,
       },
       {
         title: "All Parcel",

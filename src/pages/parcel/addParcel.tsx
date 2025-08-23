@@ -14,7 +14,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { ParcelType, IParcel } from "@/types/parcel.types";
+import { ParcelType } from "@/types/parcel.types";
 import { useAddParcelMutation } from "@/redux/apis/sender.api";
 
 const parcelSchema = z.object({

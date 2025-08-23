@@ -13,12 +13,13 @@ import Unauthorized from "@/pages/Unauthorized";
 import { role } from "@/constants/role";
 import { TRole } from "@/types";
 import Homepage from "@/pages/Homepage";
-import Success from "@/pages/Payment/Success";
-import Fail from "@/pages/Payment/Fail";
+
+
 import Track from "@/pages/User/Track";
 
 import { receiverSidebarItems } from "./receiverSidebarItems";
 import Tracking from "@/pages/User/tracking";
+import Contact from "@/pages/Contact";
 
 
 export const router = createBrowserRouter([
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         Component: Tracking,
         path: "tracking/:trackingId",
+      },
+      {
+        Component: Contact,
+        path: "Contact",
       },
 
 
@@ -88,13 +93,6 @@ export const router = createBrowserRouter([
     Component: Unauthorized,
     path: "/unauthorized",
   },
-  {
-    Component: Success,
-    path: "/payment/success",
-  },
-  {
-    Component: Fail,
-    path: "/payment/fail",
-  },
+  
 
 ]);

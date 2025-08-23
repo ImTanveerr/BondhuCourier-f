@@ -1,18 +1,16 @@
 // src/components/parcel/ParcelFilters.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ParcelType, ParcelStatus } from "@/types/parcel.types";
+import { ParcelStatus } from "@/types/parcel.types";
 
 interface ParcelFiltersProps {
   // optional callback if needed
@@ -56,39 +54,38 @@ export default function ParcelFilters({}: ParcelFiltersProps) {
     placeholder="Search description, pickup..."
     className="flex-1 min-w-[150px] border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
   />
+{/* Status + Sort side by side */}
+<div className="flex gap-2 flex-1 min-w-[260px]">
+  {/* Status */}
+  <Select onValueChange={setStatus} value={status}>
+    <SelectTrigger className="flex-1 min-w-[120px]">
+      <SelectValue placeholder="Status" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        {Object.values(ParcelStatus).map((s) => (
+          <SelectItem key={s} value={s}>
+            {s}
+          </SelectItem>
+        ))}
+      </SelectGroup>
+    </SelectContent>
+  </Select>
 
-  {/* Status + Sort side by side */}
-  <div className="flex gap-2 flex-1 min-w-[260px]">
-    {/* Status */}
-    <Select onValueChange={setStatus} value={status} className="flex-1 min-w-[120px]">
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Status" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          {Object.values(ParcelStatus).map((s) => (
-            <SelectItem key={s} value={s}>
-              {s}
-            </SelectItem>
-          ))}
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-
-    {/* Sort */}
-    <Select onValueChange={setSort} value={sort} className="flex-1 min-w-[120px]">
-      <SelectTrigger className="w-full">
-        <SelectValue placeholder="Sort" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectGroup>
-          <SelectItem value="pickupAddress">Pickup</SelectItem>
-          <SelectItem value="deliveryAddress">Delivery</SelectItem>
-          <SelectItem value="createdAt">Created At</SelectItem>
-        </SelectGroup>
-      </SelectContent>
-    </Select>
-  </div>
+  {/* Sort */}
+  <Select onValueChange={setSort} value={sort}>
+    <SelectTrigger className="flex-1 min-w-[120px]">
+      <SelectValue placeholder="Sort by" />
+    </SelectTrigger>
+    <SelectContent>
+      <SelectGroup>
+        <SelectItem value="pickupAddress">Pickup</SelectItem>
+        <SelectItem value="deliveryAddress">Delivery</SelectItem>
+        <SelectItem value="createdAt">Created At</SelectItem>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</div>
 
   {/* Buttons */}
   <div className="flex gap-2 ml-auto">
