@@ -22,13 +22,8 @@ export default function SenderDashboard() {
   const returnedCount = parcels.filter((p) => p.status == ParcelStatus.RETURNED).length;
 
   // --- Parcel type distribution ---
-  const typeCounts: Record<ParcelType, number> = {
-    DOCUMENT: 0,
-    BOX: 0,
-    FRAGILE: 0,
-    OTHER: 0,
-  };
-  parcels.forEach((p) => {
+  const typeCounts: any = { DOCUMENT: 0, BOX: 0, FRAGILE: 0, OTHER: 0 };
+parcels.forEach((p: any) => {
     if (p.parcelType) {
       typeCounts[p.parcelType] = (typeCounts[p.parcelType] || 0) + 1;
     }

@@ -38,9 +38,16 @@ export default function AdminAnalytics() {
   );
   const roleChartData = Object.keys(roleCounts).map((role) => ({ name: role, value: roleCounts[role] }));
 
-  // --- User active vs blocked ---
-  const activeUsers = users.filter((u: any) => !u.isBlocked).length;
-  const blockedUsers = users.filter((u: any) => u.isBlocked).length;
+
+
+// --- User status distribution (enum-based, like roles/parcel types) ---
+const userCounts: any={ ACTIVE: 0, INACTIVE: 0, BLOCKED: 0, BANNED: 0 };
+users.forEach((u: any) => {
+  if (userCounts[u.Status] !== undefined) {
+    userCounts[u.Status]++;
+  }
+});
+
 
  // --- Parcel type distribution (using enum values) ---
 const typeCounts: any = { DOCUMENT: 0, BOX: 0, FRAGILE: 0, OTHER: 0 };
@@ -86,27 +93,40 @@ const parcelTypeData = parcelTypes.map((t) => ({ name: t, value: typeCounts[t] }
   return (
     <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
       {/* Stats Cards */}
-      <div className="col-span-1 md:col-span-2 grid grid-cols-2 md:grid-cols-5 gap-4">
+      <div className="col-span-1 md:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-6">
         <Card>
           <CardHeader><CardTitle>Total Users</CardTitle></CardHeader>
           <CardContent>{users.length}</CardContent>
         </Card>
         <Card>
           <CardHeader><CardTitle>Active Users</CardTitle></CardHeader>
-          <CardContent>{activeUsers}</CardContent>
+          <CardContent>{userCounts["ACTIVE"]}</CardContent>
         </Card>
         <Card>
           <CardHeader><CardTitle>Blocked Users</CardTitle></CardHeader>
-          <CardContent>{blockedUsers}</CardContent>
+          <CardContent>{userCounts["BLOCKED"]}</CardContent>
+        </Card>
+        <Card>
+          <CardHeader><CardTitle>Banned Users</CardTitle></CardHeader>
+          <CardContent>{userCounts["BANNED"]}</CardContent>
         </Card>
         <Card>
           <CardHeader><CardTitle>Total Parcels</CardTitle></CardHeader>
           <CardContent>{parcels.length}</CardContent>
         </Card>
         <Card>
+          <CardHeader><CardTitle>APPROVED</CardTitle></CardHeader>
+          <CardContent>{statusCounts["APPROVED"] || 0}</CardContent>
+        </Card>
+        <Card>
+          <CardHeader><CardTitle>Returned</CardTitle></CardHeader>
+          <CardContent>{statusCounts["RETURNED"] || 0}</CardContent>
+        </Card>
+        <Card>
           <CardHeader><CardTitle>Delivered</CardTitle></CardHeader>
           <CardContent>{statusCounts["DELIVERED"] || 0}</CardContent>
         </Card>
+        
       </div>
 
       {/* Pie Chart - Users by Role */}
