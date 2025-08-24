@@ -3,7 +3,6 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import About from "@/pages/About";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
-import Verify from "@/pages/Verify";
 import { generateRoutes } from "@/utils/generateRoutes";
 import { createBrowserRouter, Navigate } from "react-router";
 import { adminSidebarItems } from "./adminSidebarItems";
@@ -84,10 +83,6 @@ export const router = createBrowserRouter([
   {
     Component: Register,
     path: "/register",
-  },
-  {
-    Component: Verify,
-    path: "/verify",
   },
   {
     Component: Unauthorized,

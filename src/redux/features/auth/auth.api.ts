@@ -1,5 +1,5 @@
 import { baseApi } from "@/redux/baseApi";
-import { IResponse, ISendOtp, IVerifyOtp } from "@/types";
+import { IResponse } from "@/types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -24,20 +24,7 @@ export const authApi = baseApi.injectEndpoints({
         data: userInfo,
       }),
     }),
-    sendOtp: builder.mutation<IResponse<null>, ISendOtp>({
-      query: (userInfo) => ({
-        url: "/otp/send",
-        method: "POST",
-        data: userInfo,
-      }),
-    }),
-    verifyOtp: builder.mutation<IResponse<null>, IVerifyOtp>({
-      query: (userInfo) => ({
-        url: "/otp/verify",
-        method: "POST",
-        data: userInfo,
-      }),
-    }),
+    
     getRoles: builder.query<string[], void>({
       query: () => ({
         url: "/roles",  // Make sure your backend has GET /roles
@@ -57,8 +44,6 @@ export const authApi = baseApi.injectEndpoints({
 export const {
   useRegisterMutation,
   useLoginMutation,
-  useSendOtpMutation,
-  useVerifyOtpMutation,
   useUserInfoQuery,
   useLogoutMutation,
   useGetRolesQuery

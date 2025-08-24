@@ -82,7 +82,7 @@ export function RegisterForm({
     try {
       await register(userInfo).unwrap();
       toast.success("User created successfully");
-      navigate("/verify");
+      navigate("/login");
     } catch (error: any) {
       toast.error(error?.data?.message || "Registration failed");
       console.error(error);
