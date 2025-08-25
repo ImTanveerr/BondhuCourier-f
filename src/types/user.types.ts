@@ -17,7 +17,8 @@ export enum UserStatus {
     ACTIVE = "ACTIVE",
     INACTIVE = "INACTIVE",
     BLOCKED = "BLOCKED",
-    BANNED = "BANNED"
+    BANNED = "BANNED",
+    status = "status"
 }
 
 export interface IUser {

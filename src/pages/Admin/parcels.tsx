@@ -16,6 +16,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { toast } from "sonner";
 
 export default function AdminParcels() {
   const [searchParams] = useSearchParams();
@@ -44,20 +45,20 @@ export default function AdminParcels() {
   const handleApprove = async (id: string) => {
     try {
       await approveParcel(id).unwrap();
-      alert("Parcel approved successfully");
+      toast.success("Parcel approved successfully");
       refetch();
     } catch (err: any) {
-      alert(err?.data?.message || "Failed to approve parcel");
+      toast.success(err?.data?.message || "Failed to approve parcel");
     }
   };
 
   const handleCancel = async (id: string) => {
     try {
       await cancelParcel(id).unwrap();
-      alert("Parcel cancelled successfully");
+      toast.success("Parcel cancelled successfully");
       refetch();
     } catch (err: any) {
-      alert(err?.data?.message || "Failed to cancel parcel");
+      toast.success(err?.data?.message || "Failed to cancel parcel");
     }
   };
 
@@ -65,10 +66,10 @@ export default function AdminParcels() {
     if (!confirm("Are you sure you want to delete this parcel?")) return;
     try {
       await deleteParcel(id).unwrap();
-      alert("Parcel deleted successfully");
+      toast.success("Parcel deleted successfully");
       refetch();
     } catch (err: any) {
-      alert(err?.data?.message || "Failed to delete parcel");
+      toast.success(err?.data?.message || "Failed to delete parcel");
     }
   };
 

@@ -4,6 +4,7 @@ import {
   useReturnParcelMutation,
 } from "@/redux/apis/receiver.api";
 import { IParcel } from "@/types/parcel.types";
+import { toast } from "sonner";
 
 export default function DeliveredParcels() {
   const { data: parcels, isLoading, isError } = useGetMyParcelsQuery();
@@ -22,18 +23,18 @@ export default function DeliveredParcels() {
   const handleReceive = async (id: string) => {
     try {
       await receiveParcel(id).unwrap();
-      alert("Parcel marked as RECEIVED");
+      toast.success("Parcel marked as RECEIVED");
     } catch (err: any) {
-      alert(err?.data?.message || "Failed to receive parcel");
+      toast.success(err?.data?.message || "Failed to receive parcel");
     }
   };
 
   const handleReturn = async (id: string) => {
     try {
       await returnParcel(id).unwrap();
-      alert("Parcel marked as RETURNED");
+      toast.success("Parcel marked as RETURNED");
     } catch (err: any) {
-      alert(err?.data?.message || "Failed to return parcel");
+      toast.success(err?.data?.message || "Failed to return parcel");
     }
   };
 

@@ -40,7 +40,7 @@ export default function CreateParcelForm({ senderId, className }: Props) {
   const form = useForm<ParcelFormValues>({
     resolver: zodResolver(parcelSchema),
     defaultValues: {
-      receiverId: "",
+      receiverId: "68a85a11b78e9c73e265a8e6",
       pickupAddress: "",
       deliveryAddress: "",
       contactNumber: "01874968514",

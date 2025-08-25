@@ -1,6 +1,7 @@
 import { useGetMyParcelsQuery, useCancelParcelMutation } from "@/redux/apis/sender.api";
 import { IParcel } from "@/types/parcel.types";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function SenderParcels() {
   const [currentPage] = useState(1);
@@ -16,9 +17,9 @@ export default function SenderParcels() {
   const handleCancel = async (id: string) => {
     try {
       await cancelParcel(id).unwrap();
-      alert("Parcel cancelled successfully");
+      toast.success("Parcel cancelled successfully");
     } catch (err: any) {
-      alert(err?.data?.message || "Failed to cancel parcel");
+      toast.success(err?.data?.message || "Failed to cancel parcel");
     }
   };
 

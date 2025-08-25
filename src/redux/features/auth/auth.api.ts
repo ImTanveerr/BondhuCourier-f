@@ -1,5 +1,4 @@
 import { baseApi } from "@/redux/baseApi";
-import { IResponse } from "@/types";
 
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

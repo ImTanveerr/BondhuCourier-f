@@ -41,15 +41,21 @@ export const adminApi = baseApi.injectEndpoints({
 
 
     // --- UPDATE USER ---
-    updateUser: builder.mutation<IUser, { id: string; body: Partial<IUser> }>({
-      query: ({ id, body }) => ({
-        url: `/admin/update-user/${id}`,
-        method: "PATCH",
-        body,
-      }),
-      invalidatesTags: ["USER"],
-      transformResponse: (res: IResponse<IUser> | any): IUser => res?.data ?? res,
-    }),
+updateUser: builder.mutation<IUser, { id: string; body: Partial<IUser> }>({
+  query: ({ id, body }) => ({
+    url: `/admin/update-user/${id}`,
+    method: "PATCH",
+    body: { ...body }, // <- send a plain object
+    headers: {
+      "Content-Type": "application/json", // ensure JSON
+    },
+  }),
+  invalidatesTags: ["USER"],
+  transformResponse: (res: IResponse<IUser> | any): IUser => res?.data ?? res,
+}),
+
+
+
 
     // --- BLOCK USER ---
     blockUser: builder.mutation<IUser, string>({
