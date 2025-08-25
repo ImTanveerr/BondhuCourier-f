@@ -1,69 +1,99 @@
-# React + TypeScript + Vite
+# 📦 Parcel Delivery Frontend (React + Redux Toolkit + RTK Query)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📖 Project Overview
 
-Currently, two official plugins are available:
+This project is a **Parcel Delivery Frontend Application** built using **React.js**, **Redux Toolkit**, and **RTK Query**.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The system is inspired by real-world courier services like **Pathao Courier** or **Sundarban Courier**, and it provides a **secure, role-based, and responsive dashboard** for three main user types:  
 
-## Expanding the ESLint configuration
+- **Sender** → can create and manage parcel requests  
+- **Receiver** → can confirm and view parcel deliveries  
+- **Admin** → can manage users, parcels, and oversee the entire system  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The application consumes a **REST API backend** and focuses on **authentication, role-based access, state management, and parcel tracking**.  
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## 🛠 Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Frontend
+- React.js + Vite  
+- React Router  
+- Redux Toolkit (State Management)  
+- RTK Query (API Calls)  
+- TypeScript  
+- Tailwind CSS (Styling)  
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Backend (Consumed API)
+- Node.js + Express  
+- MongoDB + Mongoose  
+- JWT + bcrypt  
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## ✅ Minimum Functional Requirements
+
+### 1️⃣ Public Landing Section
+- **Home Page** – Landing page introducing the parcel delivery service  
+- **About Page** – Service description, mission, and team info  
+- **Contact Page** – Inquiry form (simulated submission)  
+
+---
+
+### 2️⃣ Authentication
+- Login & Registration with JWT authentication  
+- Role-based redirection (**Sender/Receiver/Admin**)  
+- Persisted authentication (remains logged in after refresh)  
+- Logout  
+
+---
+
+### 3️⃣ Sender Dashboard
+- Create parcel delivery requests  
+- Cancel parcel (if not dispatched)  
+- View all created parcels & statuses  
+
+---
+
+### 4️⃣ Receiver Dashboard
+- View incoming parcels  
+- Confirm delivery  
+- View delivery history  
+
+---
+
+### 5️⃣ Admin Dashboard
+- Manage users (block/unblock)  
+- Manage parcels (block/unblock, update status)  
+- Assign delivery personnel (optional)  
+
+---
+
+### 6️⃣ Parcel Tracking
+- Unique tracking ID for each parcel  
+- Public or authenticated search by tracking ID  
+- Status logs (status, timestamp, updatedBy, notes)  
+
+---
+
+### 7️⃣ General Features
+- Role-based navigation  
+- Loading indicators & global error handling  
+- Form validations (required fields, numeric checks, etc.)  
+- Advanced filtering & pagination  
+- Toast notifications (success/error)  
+- **Dashboard Visuals:**  
+  - Overview Cards (Total, Delivered, In Transit, Pending/Cancelled)  
+  - Charts (bar/pie for trends & distribution)  
+  - Parcel Table (searchable, paginated, filterable)  
+  - Status Timeline (visual update history)  
+- Responsive design (mobile-friendly, clean typography, accessible colors)  
+
+---
+
+## ⚙️ Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/parcel-delivery-frontend.git
+   cd parcel-delivery-frontend
