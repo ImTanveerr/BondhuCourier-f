@@ -7,13 +7,25 @@ import { IUser } from "@/types/user.types";
 export const adminApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // --- GET USERS ---
-    getAllUsers: builder.query<IResponse<IUser[]>, void>({
-      query: () => ({
-        url: "/admin/users",
-        method: "GET",
-      }),
-      providesTags: ["USER"],
-    }),
+   getAllUsers: builder.query<
+  { data: IUser[]; meta: { total: number } },
+  { page?: number; limit?: number } | void
+>({
+  query: (filters) => {
+    const params = new URLSearchParams();
+    if (filters?.page) params.append("page", filters.page.toString());
+    if (filters?.limit) params.append("limit", filters.limit.toString());
+
+    return {
+      url: `/admin/users?${params.toString()}`,
+      method: "GET",
+    };
+  },
+  providesTags: ["USER"],
+  transformResponse: (response: { data: IUser[]; meta: { total: number } }) =>
+    response,
+}),
+
 
     // --- GET PARCELS ---
    getAllParcels: builder.query<
@@ -102,6 +114,14 @@ updateUser: builder.mutation<IUser, { id: string; body: Partial<IUser> }>({
       }),
       invalidatesTags: ["PARCEL"],
     }),
+    // --- Deliver PARCEL ---
+    deliverParcel: builder.mutation<IParcel, string>({
+      query: (id) => ({
+        url: `/admin/Deliver-parcel/${id}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["PARCEL"],
+    }),
 
     // --- CANCEL PARCEL ---
     cancelParcel: builder.mutation<IParcel, string>({
@@ -132,6 +152,7 @@ export const {
   useDeleteUserMutation,
   useUpdateParcelMutation,
   useApproveParcelMutation,
+  useDeliverParcelMutation,
   useCancelParcelMutation,
   useDeleteParcelMutation,
 } = adminApi;

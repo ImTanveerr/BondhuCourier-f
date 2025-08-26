@@ -8,26 +8,11 @@ import { toast } from "sonner";
 
 export default function ReceiverParcels() {
   const { data: parcels, isLoading, isError } = useGetMyParcelsQuery();
-  const [receiveParcel, { isLoading: isReceiving }] = useReceiveParcelMutation();
-  const [returnParcel, { isLoading: isReturning }] = useReturnParcelMutation();
+ 
 
-  const handleReceive = async (id: string) => {
-    try {
-      await receiveParcel(id).unwrap();
-      toast.success("Parcel marked as RECEIVED");
-    } catch (err: any) {
-      toast.success(err?.data?.message || "Failed to receive parcel");
-    }
-  };
+  
 
-  const handleReturn = async (id: string) => {
-    try {
-      await returnParcel(id).unwrap();
-      toast.success("Parcel RETURNED");
-    } catch (err: any) {
-      toast.success(err?.data?.message || "Cannot return parcel");
-    }
-  };
+
 
   if (isLoading) return <p>Loading parcels...</p>;
   if (isError) return <p>Error fetching parcels</p>;
@@ -79,26 +64,7 @@ export default function ReceiverParcels() {
            
           </div>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {parcel.status === "DELIVERED" && (
-              <>
-                <button
-                  onClick={() => handleReceive(parcel._id)}
-                  disabled={isReceiving}
-                  className="px-3 py-1 bg-green-600 text-white dark:bg-green-500 dark:hover:bg-green-600 rounded hover:bg-green-700 transition"
-                >
-                  {isReceiving ? "Processing..." : "Receive"}
-                </button>
-                <button
-                  onClick={() => handleReturn(parcel._id)}
-                  disabled={isReturning}
-                  className="px-3 py-1 bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600 rounded hover:bg-red-700 transition"
-                >
-                  {isReturning ? "Processing..." : "Return"}
-                </button>
-              </>
-            )}
-          </div>
+          
         </div>
       ))}
     </div>

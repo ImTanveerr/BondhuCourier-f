@@ -30,6 +30,14 @@ export const senderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["PARCEL"], // So that parcels list auto-refreshes after cancel
         }),
+        
+        acceptReturn: builder.mutation({
+            query: (parcelId: string) => ({
+                url: `/sender/Accept/${parcelId}`,
+                method: "POST",
+            }),
+            invalidatesTags: ["PARCEL"], // So that parcels list auto-refreshes after cancel
+        }),
 
         getMyParcels: builder.query<IParcel[],  { page: number; limit?: number }>({
             query: (params) => ({
@@ -45,5 +53,5 @@ export const senderApi = baseApi.injectEndpoints({
 
 
 
-export const { useAddParcelMutation, useGetMyParcelsQuery, useCancelParcelMutation } = senderApi;
+export const { useAddParcelMutation, useGetMyParcelsQuery, useCancelParcelMutation,useAcceptReturnMutation } = senderApi;
 

@@ -4,6 +4,7 @@ import {
   useApproveParcelMutation,
   useCancelParcelMutation,
   useDeleteParcelMutation,
+  useDeliverParcelMutation,
 } from "@/redux/apis/admin.api";
 import { IParcel } from "@/types/parcel.types";
 import { useSearchParams } from "react-router-dom";
@@ -23,7 +24,6 @@ export default function AdminParcels() {
   const [currentPage, setCurrentPage] = useState(1);
   const limit = 8;
 
-  // Read filters from URL
   const filters = {
     searchTerm: searchParams.get("searchTerm") || undefined,
     status: searchParams.get("status") || undefined,
@@ -33,7 +33,6 @@ export default function AdminParcels() {
     limit,
   };
 
-  // Fetch parcels with filters & pagination
   const { data, isLoading, isError, refetch } = useGetAllParcelsQuery(filters);
   const parcels: IParcel[] = data?.data || [];
   const totalPage = data?.meta?.totalPage || 1;
@@ -41,6 +40,7 @@ export default function AdminParcels() {
   const [approveParcel] = useApproveParcelMutation();
   const [cancelParcel] = useCancelParcelMutation();
   const [deleteParcel] = useDeleteParcelMutation();
+  const [deliverParcel] = useDeliverParcelMutation();
 
   const handleApprove = async (id: string) => {
     try {
@@ -48,7 +48,7 @@ export default function AdminParcels() {
       toast.success("Parcel approved successfully");
       refetch();
     } catch (err: any) {
-      toast.success(err?.data?.message || "Failed to approve parcel");
+      toast.error(err?.data?.message || "Failed to approve parcel");
     }
   };
 
@@ -58,7 +58,7 @@ export default function AdminParcels() {
       toast.success("Parcel cancelled successfully");
       refetch();
     } catch (err: any) {
-      toast.success(err?.data?.message || "Failed to cancel parcel");
+      toast.error(err?.data?.message || "Failed to cancel parcel");
     }
   };
 
@@ -69,13 +69,19 @@ export default function AdminParcels() {
       toast.success("Parcel deleted successfully");
       refetch();
     } catch (err: any) {
-      toast.success(err?.data?.message || "Failed to delete parcel");
+      toast.error(err?.data?.message || "Failed to delete parcel");
     }
   };
 
-  if (isLoading) return <p>Loading parcels…</p>;
-  if (isError) return <p>Error fetching parcels</p>;
-  if (!parcels.length) return <p>No parcels found</p>;
+  const handleDeliver = async (id: string) => {
+    try {
+      await deliverParcel(id).unwrap();
+      toast.success("Parcel delivered successfully");
+      refetch();
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed to deliver parcel");
+    }
+  };
 
   return (
     <div className="">
@@ -83,8 +89,16 @@ export default function AdminParcels() {
       <div className="">
         <ParcelFilters />
       </div>
+
       {/* Parcel List */}
       <div className="p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {isLoading && <p>Loading parcels…</p>}
+        {isError && <p>Error fetching parcels</p>}
+
+        {!isLoading && !isError && parcels.length === 0 && (
+          <p>No parcels found</p>
+        )}
+
         {parcels.map((parcel: IParcel) => (
           <div
             key={parcel._id}
@@ -100,14 +114,15 @@ export default function AdminParcels() {
               <p className="text-gray-700 dark:text-gray-300">
                 <span className="font-medium">Status:</span>{" "}
                 <span
-                  className={`px-2 py-0.5 rounded-full text-sm font-medium ${parcel.status === "APPROVED"
-                    ? "bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
-                    : parcel.status === "CANCELLED"
+                  className={`px-2 py-0.5 rounded-full text-sm font-medium ${
+                    parcel.status === "APPROVED"
+                      ? "bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100"
+                      : parcel.status === "CANCELLED"
                       ? "bg-red-100 text-red-800 dark:bg-red-800 dark:text-red-100"
                       : parcel.status === "DELIVERED"
-                        ? "bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100"
-                        : "bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
-                    }`}
+                      ? "bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100"
+                      : "bg-yellow-100 text-yellow-800 dark:bg-yellow-800 dark:text-yellow-100"
+                  }`}
                 >
                   {parcel.status}
                 </span>
@@ -127,7 +142,7 @@ export default function AdminParcels() {
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              {parcel.status !== "APPROVED" && (
+              {parcel.status !== "APPROVED" && parcel.status !== "DELIVERED" && (
                 <button
                   onClick={() => handleApprove(parcel._id)}
                   className="px-3 py-1 bg-green-600 text-white dark:bg-green-500 dark:hover:bg-green-600 rounded hover:bg-green-700 transition"
@@ -135,6 +150,7 @@ export default function AdminParcels() {
                   Approve
                 </button>
               )}
+
               {parcel.status !== "CANCELLED" && parcel.status !== "DELIVERED" && (
                 <button
                   onClick={() => handleCancel(parcel._id)}
@@ -143,6 +159,16 @@ export default function AdminParcels() {
                   Cancel
                 </button>
               )}
+
+              {parcel.status === "APPROVED" && (
+                <button
+                  onClick={() => handleDeliver(parcel._id)}
+                  className="px-3 py-1 bg-blue-600 text-white dark:bg-blue-500 dark:hover:bg-blue-600 rounded hover:bg-blue-700 transition"
+                >
+                  Deliver
+                </button>
+              )}
+
               <button
                 onClick={() => handleDelete(parcel._id)}
                 className="px-3 py-1 bg-gray-600 text-white dark:bg-gray-700 dark:hover:bg-gray-600 rounded hover:bg-gray-700 transition"
@@ -151,14 +177,12 @@ export default function AdminParcels() {
               </button>
             </div>
           </div>
-
         ))}
       </div>
 
-
       {/* Pagination */}
       {totalPage > 1 && (
-        <div className=" w-full bottom-0 left-0 p-4 flex justify-center bg-transparent">
+        <div className="w-full bottom-0 left-0 p-4 flex justify-center bg-transparent">
           <Pagination>
             <PaginationContent>
               <PaginationItem>
@@ -182,13 +206,9 @@ export default function AdminParcels() {
               </PaginationItem>
             </PaginationContent>
           </Pagination>
+          
         </div>
       )}
-
-
-
     </div>
   );
 }
-
-

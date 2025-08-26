@@ -40,13 +40,13 @@ export default function CreateParcelForm({ senderId, className }: Props) {
   const form = useForm<ParcelFormValues>({
     resolver: zodResolver(parcelSchema),
     defaultValues: {
-      receiverId: "68a85a11b78e9c73e265a8e6",
+      receiverId: "68aca01de929453a712f8cb9",
       pickupAddress: "",
       deliveryAddress: "",
-      contactNumber: "01874968514",
-      weight: 0,
-      parcelType: ParcelType.DOCUMENT,
-      description: "tumi valo ami valo baki sovai kalo",
+      contactNumber: "01874969514",
+      weight: 2.5,
+      parcelType: ParcelType.BOX,
+      description: "bhari parcel, sabdhane niyo",
     },
   });
 
@@ -161,7 +161,7 @@ export default function CreateParcelForm({ senderId, className }: Props) {
                       onValueChange={(value) => field.onChange(value)}
                       value={field.value}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className="w-full">  {/* 🔥 full width */}
                         <SelectValue placeholder="Select Parcel Type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -181,6 +181,7 @@ export default function CreateParcelForm({ senderId, className }: Props) {
               )}
             />
           </div>
+
 
           {/* Description */}
           <FormField
