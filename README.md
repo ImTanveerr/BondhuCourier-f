@@ -66,7 +66,8 @@ The application consumes a **REST API backend** and focuses on **authentication,
 
 ### 5️⃣ Admin Dashboard
 - Manage users (block/unblock)  
-- Manage parcels (block/unblock, update status)  
+- Manage parcels (block/unblock, update status)
+- Pagination for users and parcels
 
 ---
 
@@ -81,7 +82,8 @@ The application consumes a **REST API backend** and focuses on **authentication,
 - Role-based navigation  
 - Loading indicators & global error handling  
 - Form validations (required fields, numeric checks, etc.)  
-- Advanced filtering & pagination  
+- Advanced filtering & pagination
+- Lazy loaders
 - Toast notifications (success/error)  
 - Responsive design (mobile-friendly, clean typography, accessible colors)  
 
