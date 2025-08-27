@@ -23,7 +23,7 @@ export const senderApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["SENDER"],
         }),
-        cancelParcel: builder.mutation({
+        cancelmyParcel: builder.mutation<IParcel, string>({
             query: (parcelId: string) => ({
                 url: `/sender/Cancel/${parcelId}`,
                 method: "POST",
@@ -31,6 +31,9 @@ export const senderApi = baseApi.injectEndpoints({
             invalidatesTags: ["PARCEL"], // So that parcels list auto-refreshes after cancel
         }),
         
+
+
+
         acceptReturn: builder.mutation({
             query: (parcelId: string) => ({
                 url: `/sender/Accept/${parcelId}`,
@@ -53,5 +56,5 @@ export const senderApi = baseApi.injectEndpoints({
 
 
 
-export const { useAddParcelMutation, useGetMyParcelsQuery, useCancelParcelMutation,useAcceptReturnMutation } = senderApi;
+export const { useAddParcelMutation, useGetMyParcelsQuery, useCancelmyParcelMutation,useAcceptReturnMutation } = senderApi;
 

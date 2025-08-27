@@ -31,11 +31,7 @@ export const adminSidebarItems: ISidebarItem[] = [
         url: "/admin/parcels",
         component: parcels,
       },
-      // {
-      //   title: "Filter Parcels",
-      //   url: "/admin/filter-parcels",
-      //   component: parcelFilter,
-      // },
+    
       
     ],
   },

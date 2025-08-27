@@ -1,10 +1,7 @@
 import {
-  useGetMyParcelsQuery,
-  useReceiveParcelMutation,
-  useReturnParcelMutation,
+  useGetMyParcelsQuery
 } from "@/redux/apis/receiver.api";
 import { IParcel } from "@/types/parcel.types";
-import { toast } from "sonner";
 
 export default function ReceiverParcels() {
   const { data: parcels, isLoading, isError } = useGetMyParcelsQuery();

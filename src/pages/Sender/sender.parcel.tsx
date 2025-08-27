@@ -1,8 +1,8 @@
 import { useState } from "react";
 import {
   useGetMyParcelsQuery,
-  useCancelParcelMutation,
   useAcceptReturnMutation,
+  useCancelmyParcelMutation,
 } from "@/redux/apis/sender.api";
 import { IParcel } from "@/types/parcel.types";
 import { toast } from "sonner";
@@ -15,7 +15,7 @@ export default function SenderParcels() {
     limit: 8,
   });
 
-  const [cancelParcel, { isLoading: isCancelling }] = useCancelParcelMutation();
+  const [cancelParcel, { isLoading: isCancelling }] = useCancelmyParcelMutation();
   const [acceptReturn, { isLoading: isReturning }] = useAcceptReturnMutation();
 
   const handleCancel = async (id: string) => {

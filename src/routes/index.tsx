@@ -19,6 +19,8 @@ import Track from "@/pages/User/Track";
 import { receiverSidebarItems } from "./receiverSidebarItems";
 import Tracking from "@/pages/User/tracking";
 import Contact from "@/pages/Contact";
+import FAQ from "@/pages/FAQ";
+import Features from "@/pages/Features";
 
 
 export const router = createBrowserRouter([
@@ -45,6 +47,14 @@ export const router = createBrowserRouter([
       {
         Component: Contact,
         path: "Contact",
+      },
+      {
+        Component: Features,
+        path: "Features",
+      },
+      {
+        Component: FAQ,
+        path: "FAQ",
       },
 
 
