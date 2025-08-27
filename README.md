@@ -95,7 +95,7 @@ Below are 3 sample accounts for testing the system:
 
 | Role     | Email                  | Password       |
 |----------|-----------------------|----------------|
-| Admin    | admin@example.com      | Admin@123      |
+| Admin    | super@gmail.com      | Super23@      |
 | Sender   | sender@example.com     | Sender@123     |
 | Receiver | receiver@example.com   | Receiver@123   |
 
