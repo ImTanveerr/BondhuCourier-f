@@ -31,12 +31,13 @@ The application consumes a **REST API backend** and focuses on **authentication,
 
 ---
 
-## ✅ Minimum Functional Requirements
-
 ### 1️⃣ Public Landing Section
 - **Home Page** – Landing page introducing the parcel delivery service  
-- **About Page** – Service description, mission, and team info  
-- **Contact Page** – Inquiry form (simulated submission)  
+- **Track Parcel** – Parcel inquiry form for users to track shipment status
+- **Features** –  Highlights of the service’s key offerings and benefits
+- **FAQ** – Frequently asked questions with clear, concise answers
+- **Contact** – Contact form and company information for user inquiries
+- **About Page** – Information about the company, mission, and team
 
 ---
 
@@ -51,13 +52,14 @@ The application consumes a **REST API backend** and focuses on **authentication,
 ### 3️⃣ Sender Dashboard
 - Create parcel delivery requests  
 - Cancel parcel (if not dispatched)  
+- Accept return parcel (if receiver return the parcel)  
 - View all created parcels & statuses  
 
 ---
 
 ### 4️⃣ Receiver Dashboard
 - View incoming parcels  
-- Confirm delivery  
+- Receive or return parcels after delivery 
 - View delivery history  
 
 ---
@@ -65,7 +67,6 @@ The application consumes a **REST API backend** and focuses on **authentication,
 ### 5️⃣ Admin Dashboard
 - Manage users (block/unblock)  
 - Manage parcels (block/unblock, update status)  
-- Assign delivery personnel (optional)  
 
 ---
 
@@ -82,18 +83,19 @@ The application consumes a **REST API backend** and focuses on **authentication,
 - Form validations (required fields, numeric checks, etc.)  
 - Advanced filtering & pagination  
 - Toast notifications (success/error)  
-- **Dashboard Visuals:**  
-  - Overview Cards (Total, Delivered, In Transit, Pending/Cancelled)  
-  - Charts (bar/pie for trends & distribution)  
-  - Parcel Table (searchable, paginated, filterable)  
-  - Status Timeline (visual update history)  
 - Responsive design (mobile-friendly, clean typography, accessible colors)  
 
 ---
 
-## ⚙️ Setup Instructions
+# Sample Login Details
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/your-username/parcel-delivery-frontend.git
-   cd parcel-delivery-frontend
+Below are 3 sample accounts for testing the system:
+
+| Role     | Email                  | Password       |
+|----------|-----------------------|----------------|
+| Admin    | admin@example.com      | Admin@123      |
+| Sender   | sender@example.com     | Sender@123     |
+| Receiver | receiver@example.com   | Receiver@123   |
+
+> ⚠️ **Note:** These are test accounts for development purposes only. 
+
