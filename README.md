@@ -58,9 +58,10 @@ The application consumes a **REST API backend** and focuses on **authentication,
 ---
 
 ### 4️⃣ Receiver Dashboard
+- View all parcels  
 - View incoming parcels  
-- Receive or return parcels after delivery 
-- View delivery history  
+- View delivery history
+- Receive or return parcels after delivery only available in Delivered parcel page 
 
 ---
 
