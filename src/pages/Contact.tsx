@@ -27,7 +27,7 @@ const contactSchema = z.object({
 
 type ContactFormValues = z.infer<typeof contactSchema>;
 
-export default function ContactPage({ className }: { className?: string }) {
+export default function ContactPage({ }: { className?: string }) {
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
